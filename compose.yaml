@@ -4,29 +4,32 @@ services:
     image: nginx:latest
     ports:
       - "8090:80"
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html:ro
     networks:
       - cloud-network
     depends_on:
       db:
         condition: service_healthy
+
   db:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: root123
       MYSQL_DATABASE: cloudlab
-    volumes:
-      - mysql-data:/var/lib/mysql
-    networks:
-      - cloud-network
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot123"]
       interval: 5s
       timeout: 5s
       retries: 10
-
-volumes:
-  mysql-data:
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - cloud-network
 
 networks:
   cloud-network:
     driver: bridge
+
+volumes:
+  mysql-data:
