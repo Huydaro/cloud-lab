@@ -37,3 +37,16 @@ jobs:
       - name: Push web image
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: docker push huydaro/cloud-lab-web:latest
+
+      - name: Deploy to server
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd ~/cloud-lab
+            docker compose pull web
+            docker compose up -d
+            docker compose ps
