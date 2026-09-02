@@ -1,4 +1,3 @@
-```yaml
 name: Cloud Lab CI
 
 on:
@@ -38,4 +37,3 @@ jobs:
       - name: Push web image
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: docker push huydaro/cloud-lab-web:latest
-```
