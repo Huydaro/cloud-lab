@@ -4,120 +4,263 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cloud Engineering Lab - Containerized Infrastructure">
-    <title>Cloud Lab | Infrastructure Dashboard</title>
+    <meta name="description" content="Cloud Lab — Modern Cloud Infrastructure Platform">
+    <meta name="theme-color" content="#ffffff">
+    <title>Cloud Lab — Infrastructure Platform</title>
 
 ```
 <style>
+    :root {
+        --white: #ffffff;
+        --bg: #f7f9fc;
+        --surface: #ffffff;
+        --text: #0b1220;
+        --muted: #667085;
+        --soft: #98a2b3;
+        --border: #e7eaf0;
+        --blue: #2563eb;
+        --blue-dark: #1d4ed8;
+        --blue-soft: #eff6ff;
+        --green: #16a34a;
+        --shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
+    }
+
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
 
-    body {
-        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                     Roboto, Helvetica, Arial, sans-serif;
-        background: #0b1120;
-        color: #e5e7eb;
-        min-height: 100vh;
+    html {
+        scroll-behavior: smooth;
     }
 
-    .navbar {
-        height: 72px;
-        border-bottom: 1px solid rgba(255,255,255,.08);
-        background: rgba(11,17,32,.85);
-        backdrop-filter: blur(12px);
+    body {
+        font-family:
+            Inter,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            Roboto,
+            Helvetica,
+            Arial,
+            sans-serif;
+        color: var(--text);
+        background: var(--white);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAVIGATION */
+
+    .nav {
+        height: 76px;
+        background: rgba(255,255,255,.88);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border-bottom: 1px solid rgba(15,23,42,.06);
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 7%;
+        padding: 0 6%;
         position: sticky;
         top: 0;
-        z-index: 10;
+        z-index: 100;
     }
 
     .brand {
         display: flex;
         align-items: center;
         gap: 12px;
-        font-weight: 700;
-        font-size: 20px;
-        color: #fff;
+        color: var(--text);
+        text-decoration: none;
+        font-size: 19px;
+        font-weight: 750;
+        letter-spacing: -.4px;
     }
 
-    .brand-icon {
+    .logo {
         width: 38px;
         height: 38px;
-        border-radius: 10px;
         display: grid;
         place-items: center;
-        background: linear-gradient(135deg, #2563eb, #06b6d4);
-        box-shadow: 0 8px 30px rgba(37,99,235,.3);
+        border-radius: 11px;
+        color: white;
+        background: linear-gradient(135deg, #2563eb, #4f46e5);
+        box-shadow: 0 8px 22px rgba(37,99,235,.20);
     }
 
-    .status {
+    .nav-right {
         display: flex;
         align-items: center;
-        gap: 8px;
-        font-size: 14px;
-        color: #a7f3d0;
+        gap: 9px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 600;
     }
 
-    .dot {
-        width: 9px;
-        height: 9px;
+    .online-dot {
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
-        background: #22c55e;
-        box-shadow: 0 0 12px #22c55e;
+        background: var(--green);
+        box-shadow: 0 0 0 4px #dcfce7;
     }
+
+    /* HERO */
 
     .hero {
-        max-width: 1180px;
-        margin: auto;
-        padding: 90px 24px 60px;
+        position: relative;
+        overflow: hidden;
         text-align: center;
+        padding: 112px 24px 105px;
+        background:
+            radial-gradient(circle at 50% 0%,
+            rgba(37,99,235,.09),
+            transparent 42%);
     }
 
-    .badge {
+    .hero::before {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        left: 50%;
+        top: -300px;
+        transform: translateX(-50%);
+        background: rgba(37,99,235,.05);
+        filter: blur(80px);
+        border-radius: 50%;
+    }
+
+    .hero-content {
+        position: relative;
+        max-width: 900px;
+        margin: auto;
+    }
+
+    .eyebrow {
         display: inline-flex;
-        padding: 8px 14px;
-        border: 1px solid rgba(96,165,250,.25);
-        background: rgba(37,99,235,.10);
-        color: #93c5fd;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 13px;
+        border: 1px solid #dbe5f7;
+        background: rgba(255,255,255,.9);
         border-radius: 999px;
-        font-size: 13px;
-        margin-bottom: 24px;
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 750;
+        letter-spacing: .6px;
+        text-transform: uppercase;
+        box-shadow: 0 4px 15px rgba(15,23,42,.04);
+        margin-bottom: 28px;
     }
 
     h1 {
-        font-size: clamp(42px, 7vw, 72px);
-        line-height: 1.05;
-        letter-spacing: -2px;
-        color: #fff;
-        margin-bottom: 22px;
+        font-size: clamp(48px, 7vw, 82px);
+        line-height: 1.02;
+        letter-spacing: -4px;
+        font-weight: 800;
+        color: #0b1220;
+        margin-bottom: 27px;
     }
 
-    .gradient {
-        background: linear-gradient(90deg, #60a5fa, #22d3ee, #a78bfa);
+    .gradient-text {
+        background: linear-gradient(
+            90deg,
+            #2563eb,
+            #4f46e5,
+            #7c3aed
+        );
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
     }
 
-    .hero p {
+    .hero-description {
         max-width: 680px;
         margin: auto;
-        color: #94a3b8;
+        color: var(--muted);
         font-size: 18px;
-        line-height: 1.7;
+        line-height: 1.75;
     }
 
-    .container {
+    .hero-actions {
+        margin-top: 35px;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 20px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 700;
+        transition: .2s ease;
+    }
+
+    .button-primary {
+        color: white;
+        background: var(--text);
+        box-shadow: 0 8px 20px rgba(15,23,42,.14);
+    }
+
+    .button-primary:hover {
+        transform: translateY(-2px);
+        background: #182235;
+    }
+
+    .button-secondary {
+        color: var(--text);
+        background: white;
+        border: 1px solid var(--border);
+    }
+
+    .button-secondary:hover {
+        border-color: #cbd5e1;
+        background: #f8fafc;
+    }
+
+    /* MAIN */
+
+    .main {
         max-width: 1180px;
         margin: auto;
-        padding: 0 24px 80px;
+        padding: 20px 24px 100px;
     }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 42px;
+    }
+
+    .section-header span {
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .section-header h2 {
+        margin-top: 8px;
+        font-size: 34px;
+        letter-spacing: -1.5px;
+    }
+
+    .section-header p {
+        color: var(--muted);
+        margin-top: 8px;
+        font-size: 15px;
+    }
+
+    /* CARDS */
 
     .grid {
         display: grid;
@@ -126,105 +269,220 @@
     }
 
     .card {
-        background: linear-gradient(145deg, #111827, #0f172a);
-        border: 1px solid rgba(255,255,255,.08);
+        background: var(--surface);
+        border: 1px solid var(--border);
         border-radius: 18px;
-        padding: 25px;
-        transition: .25s ease;
+        padding: 28px;
+        box-shadow: var(--shadow);
+        transition:
+            transform .25s ease,
+            box-shadow .25s ease,
+            border-color .25s ease;
     }
 
     .card:hover {
-        transform: translateY(-4px);
-        border-color: rgba(96,165,250,.35);
-        box-shadow: 0 18px 50px rgba(0,0,0,.25);
+        transform: translateY(-5px);
+        border-color: #d4def0;
+        box-shadow: 0 18px 50px rgba(15,23,42,.09);
     }
 
-    .icon {
-        font-size: 28px;
-        margin-bottom: 18px;
+    .card-icon {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border-radius: 13px;
+        background: var(--blue-soft);
+        font-size: 22px;
+        margin-bottom: 22px;
     }
 
     .card h3 {
-        color: #fff;
+        font-size: 17px;
+        letter-spacing: -.3px;
         margin-bottom: 8px;
-        font-size: 18px;
     }
 
     .card p {
-        color: #64748b;
+        color: var(--muted);
         font-size: 14px;
-        line-height: 1.6;
+        line-height: 1.7;
     }
 
-    .value {
-        margin-top: 18px;
-        color: #34d399;
-        font-size: 14px;
-        font-weight: 600;
+    .card-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        margin-top: 20px;
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 750;
     }
+
+    .card-status i {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--green);
+    }
+
+    /* ARCHITECTURE */
 
     .architecture {
-        margin-top: 22px;
-        padding: 30px;
-        background: #0f172a;
-        border: 1px solid rgba(255,255,255,.08);
-        border-radius: 20px;
+        margin-top: 70px;
+        padding: 42px;
+        border-radius: 22px;
+        border: 1px solid var(--border);
+        background:
+            linear-gradient(180deg, #ffffff, #fafbfe);
+        box-shadow: var(--shadow);
     }
 
     .architecture h2 {
-        color: #fff;
-        margin-bottom: 22px;
+        text-align: center;
+        font-size: 27px;
+        letter-spacing: -1px;
+        margin-bottom: 10px;
+    }
+
+    .architecture-subtitle {
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 35px;
     }
 
     .flow {
         display: flex;
-        align-items: center;
         justify-content: center;
-        gap: 12px;
+        align-items: center;
         flex-wrap: wrap;
+        gap: 10px;
     }
 
     .node {
-        padding: 14px 20px;
-        background: #111827;
-        border: 1px solid #263449;
-        border-radius: 12px;
-        font-size: 14px;
-        color: #cbd5e1;
+        padding: 13px 17px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: white;
+        color: #344054;
+        font-size: 13px;
+        font-weight: 700;
+        box-shadow: 0 4px 12px rgba(15,23,42,.04);
     }
 
     .arrow {
-        color: #38bdf8;
-        font-size: 20px;
+        color: #98a2b3;
+        font-size: 18px;
     }
 
-    footer {
+    /* METRICS */
+
+    .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: 18px;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        overflow: hidden;
+        background: white;
+        box-shadow: var(--shadow);
+    }
+
+    .metric {
         text-align: center;
-        border-top: 1px solid rgba(255,255,255,.07);
-        padding: 28px 20px;
-        color: #64748b;
-        font-size: 13px;
+        padding: 28px 15px;
+        border-right: 1px solid var(--border);
+    }
+
+    .metric:last-child {
+        border-right: none;
+    }
+
+    .metric strong {
+        display: block;
+        font-size: 25px;
+        letter-spacing: -.8px;
+    }
+
+    .metric span {
+        display: block;
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    /* FOOTER */
+
+    footer {
+        border-top: 1px solid var(--border);
+        background: #fbfcfe;
+        padding: 35px 24px;
+        text-align: center;
+        color: var(--soft);
+        font-size: 12px;
     }
 
     footer strong {
-        color: #94a3b8;
+        color: #475467;
     }
 
-    @media (max-width: 800px) {
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+        .grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .metrics {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .metric:nth-child(2) {
+            border-right: none;
+        }
+
+        .metric:nth-child(-n+2) {
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1 {
+            letter-spacing: -2.5px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .nav {
+            padding: 0 20px;
+        }
+
+        .hero {
+            padding: 80px 20px 75px;
+        }
+
+        .hero-description {
+            font-size: 16px;
+        }
+
+        h1 {
+            font-size: 48px;
+        }
+
         .grid {
             grid-template-columns: 1fr;
         }
 
-        .hero {
-            padding-top: 65px;
+        .architecture {
+            padding: 28px 18px;
         }
 
-        h1 {
-            letter-spacing: -1px;
+        .arrow {
+            transform: rotate(90deg);
         }
 
-        .navbar {
-            padding: 0 20px;
+        .metrics {
+            grid-template-columns: 1fr 1fr;
         }
     }
 </style>
@@ -235,119 +493,196 @@
 <body>
 
 ```
-<nav class="navbar">
-    <div class="brand">
-        <div class="brand-icon">☁</div>
+<!-- NAVIGATION -->
+<nav class="nav">
+    <a href="#" class="brand">
+        <div class="logo">☁</div>
         Cloud Lab
-    </div>
+    </a>
 
-    <div class="status">
-        <span class="dot"></span>
-        Infrastructure Online
+    <div class="nav-right">
+        <span class="online-dot"></span>
+        All systems operational
     </div>
 </nav>
 
-<section class="hero">
-    <div class="badge">● CLOUD ENGINEERING ENVIRONMENT</div>
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-content">
 
-    <h1>
-        Build. Deploy.<br>
-        <span class="gradient">Scale with Confidence.</span>
-    </h1>
-
-    <p>
-        A production-style cloud engineering laboratory powered by
-        Docker, MySQL, GitHub Actions, and Tailscale.
-        Designed to demonstrate modern infrastructure and automated deployment.
-    </p>
-</section>
-
-<main class="container">
-
-    <div class="grid">
-
-        <div class="card">
-            <div class="icon">🐳</div>
-            <h3>Docker Platform</h3>
-            <p>
-                Containerized application infrastructure with isolated
-                and reproducible environments.
-            </p>
-            <div class="value">● Containerized</div>
+        <div class="eyebrow">
+            <span>✦</span>
+            Cloud Infrastructure Platform
         </div>
 
-        <div class="card">
-            <div class="icon">⚙️</div>
-            <h3>CI / CD Pipeline</h3>
-            <p>
-                Automated builds, image publishing and deployment
-                through GitHub Actions.
-            </p>
-            <div class="value">● Automated</div>
-        </div>
+        <h1>
+            Modern infrastructure.<br>
+            <span class="gradient-text">Built to scale.</span>
+        </h1>
 
-        <div class="card">
-            <div class="icon">🔐</div>
-            <h3>Secure Network</h3>
-            <p>
-                Private server connectivity using Tailscale with
-                encrypted machine-to-machine communication.
-            </p>
-            <div class="value">● Protected</div>
-        </div>
+        <p class="hero-description">
+            A professional cloud engineering environment demonstrating
+            containerized workloads, automated CI/CD, secure networking,
+            and reliable infrastructure operations.
+        </p>
 
-        <div class="card">
-            <div class="icon">🗄️</div>
-            <h3>Database</h3>
-            <p>
-                MySQL 8 database running as a dedicated Docker service
-                with persistent storage.
-            </p>
-            <div class="value">● Healthy</div>
-        </div>
+        <div class="hero-actions">
+            <a href="#architecture" class="button button-primary">
+                Explore Architecture
+            </a>
 
-        <div class="card">
-            <div class="icon">🌐</div>
-            <h3>Web Service</h3>
-            <p>
-                NGINX-based web container exposed through a controlled
-                application port.
-            </p>
-            <div class="value">● Online · Port 8090</div>
-        </div>
-
-        <div class="card">
-            <div class="icon">🚀</div>
-            <h3>Deployment</h3>
-            <p>
-                Docker images are published to Docker Hub and deployed
-                automatically to the cloud lab server.
-            </p>
-            <div class="value">● Ready</div>
+            <a href="#services" class="button button-secondary">
+                View Services
+            </a>
         </div>
 
     </div>
+</header>
 
-    <section class="architecture">
+<main class="main">
+
+    <!-- SERVICES -->
+    <section id="services">
+
+        <div class="section-header">
+            <span>Infrastructure</span>
+            <h2>Everything connected.</h2>
+            <p>A clean, reliable foundation for modern cloud workloads.</p>
+        </div>
+
+        <div class="grid">
+
+            <article class="card">
+                <div class="card-icon">🐳</div>
+                <h3>Container Platform</h3>
+                <p>
+                    Application workloads run inside reproducible,
+                    isolated Docker containers.
+                </p>
+                <div class="card-status">
+                    <i></i> Operational
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Continuous Delivery</h3>
+                <p>
+                    GitHub Actions automatically builds, publishes,
+                    and deploys application releases.
+                </p>
+                <div class="card-status">
+                    <i></i> Automated
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-icon">🔐</div>
+                <h3>Private Networking</h3>
+                <p>
+                    Secure machine-to-machine connectivity powered
+                    by encrypted Tailscale networking.
+                </p>
+                <div class="card-status">
+                    <i></i> Protected
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-icon">◉</div>
+                <h3>MySQL Database</h3>
+                <p>
+                    Persistent MySQL infrastructure deployed as an
+                    independent Docker service.
+                </p>
+                <div class="card-status">
+                    <i></i> Healthy
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-icon">◎</div>
+                <h3>Web Application</h3>
+                <p>
+                    Lightweight NGINX-based application serving the
+                    Cloud Lab experience.
+                </p>
+                <div class="card-status">
+                    <i></i> Online · 8090
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-icon">↗</div>
+                <h3>Automated Deployment</h3>
+                <p>
+                    Production-style deployment from source control
+                    to Docker Hub and the cloud server.
+                </p>
+                <div class="card-status">
+                    <i></i> Ready
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- METRICS -->
+    <section class="metrics">
+        <div class="metric">
+            <strong>99.9%</strong>
+            <span>Target Availability</span>
+        </div>
+
+        <div class="metric">
+            <strong>24/7</strong>
+            <span>Infrastructure</span>
+        </div>
+
+        <div class="metric">
+            <strong>CI/CD</strong>
+            <span>Automated Delivery</span>
+        </div>
+
+        <div class="metric">
+            <strong>Secure</strong>
+            <span>Private Network</span>
+        </div>
+    </section>
+
+    <!-- ARCHITECTURE -->
+    <section class="architecture" id="architecture">
+
         <h2>Deployment Architecture</h2>
+
+        <p class="architecture-subtitle">
+            From source code to running production-style infrastructure.
+        </p>
 
         <div class="flow">
             <div class="node">GitHub</div>
             <span class="arrow">→</span>
+
             <div class="node">GitHub Actions</div>
             <span class="arrow">→</span>
+
             <div class="node">Docker Hub</div>
             <span class="arrow">→</span>
+
             <div class="node">Tailscale</div>
             <span class="arrow">→</span>
+
             <div class="node">Bank Server</div>
             <span class="arrow">→</span>
+
             <div class="node">Docker Compose</div>
         </div>
+
     </section>
 
 </main>
 
+<!-- FOOTER -->
 <footer>
     <strong>Cloud Lab</strong> · Cloud Engineering Infrastructure
     <br>
