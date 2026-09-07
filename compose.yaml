@@ -1,6 +1,6 @@
 services:
   web:
-    image: cloud-lab-web:v2
+    image: huydaro/cloud-lab-web:latest
     depends_on:
       db:
         condition: service_healthy
