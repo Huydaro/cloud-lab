@@ -49,7 +49,7 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           tailscale status
-          tailscale ping 100.83.66.107
+          tailscale ping --c 3 100.83.66.107 || true
           nc -zv 100.83.66.107 22
 
       - name: Deploy to server
