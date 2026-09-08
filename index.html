@@ -1,500 +1,938 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cloud Lab — Modern Cloud Infrastructure Platform">
-    <meta name="theme-color" content="#ffffff">
-    <title>Cloud Lab — Infrastructure Platform</title>
 
-```
-<style>
-    :root {
-        --white: #ffffff;
-        --bg: #f7f9fc;
-        --surface: #ffffff;
-        --text: #0b1220;
-        --muted: #667085;
-        --soft: #98a2b3;
-        --border: #e7eaf0;
-        --blue: #2563eb;
-        --blue-dark: #1d4ed8;
-        --blue-soft: #eff6ff;
-        --green: #16a34a;
-        --shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
-    }
+    <meta name="description"
+          content="Cloud Lab — Premium Cloud Engineering & DevOps Infrastructure">
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+    <meta name="theme-color" content="#070b14">
 
-    html {
-        scroll-behavior: smooth;
-    }
+    <title>Cloud Lab — Premium Infrastructure</title>
 
-    body {
-        font-family:
-            Inter,
-            -apple-system,
-            BlinkMacSystemFont,
-            "Segoe UI",
-            Roboto,
-            Helvetica,
-            Arial,
-            sans-serif;
-        color: var(--text);
-        background: var(--white);
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-    }
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
-    /* NAVIGATION */
+        :root {
+            --bg: #05070d;
+            --bg-2: #080c16;
+            --surface: rgba(255,255,255,.055);
+            --surface-2: rgba(255,255,255,.08);
 
-    .nav {
-        height: 76px;
-        background: rgba(255,255,255,.88);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-        border-bottom: 1px solid rgba(15,23,42,.06);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 6%;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
+            --white: #ffffff;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --soft: #64748b;
 
-    .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: var(--text);
-        text-decoration: none;
-        font-size: 19px;
-        font-weight: 750;
-        letter-spacing: -.4px;
-    }
+            --border: rgba(255,255,255,.10);
 
-    .logo {
-        width: 38px;
-        height: 38px;
-        display: grid;
-        place-items: center;
-        border-radius: 11px;
-        color: white;
-        background: linear-gradient(135deg, #2563eb, #4f46e5);
-        box-shadow: 0 8px 22px rgba(37,99,235,.20);
-    }
+            --blue: #3b82f6;
+            --cyan: #22d3ee;
+            --violet: #8b5cf6;
+            --green: #22c55e;
 
-    .nav-right {
-        display: flex;
-        align-items: center;
-        gap: 9px;
-        color: var(--muted);
-        font-size: 13px;
-        font-weight: 600;
-    }
-
-    .online-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--green);
-        box-shadow: 0 0 0 4px #dcfce7;
-    }
-
-    /* HERO */
-
-    .hero {
-        position: relative;
-        overflow: hidden;
-        text-align: center;
-        padding: 112px 24px 105px;
-        background:
-            radial-gradient(circle at 50% 0%,
-            rgba(37,99,235,.09),
-            transparent 42%);
-    }
-
-    .hero::before {
-        content: "";
-        position: absolute;
-        width: 500px;
-        height: 500px;
-        left: 50%;
-        top: -300px;
-        transform: translateX(-50%);
-        background: rgba(37,99,235,.05);
-        filter: blur(80px);
-        border-radius: 50%;
-    }
-
-    .hero-content {
-        position: relative;
-        max-width: 900px;
-        margin: auto;
-    }
-
-    .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 7px 13px;
-        border: 1px solid #dbe5f7;
-        background: rgba(255,255,255,.9);
-        border-radius: 999px;
-        color: var(--blue);
-        font-size: 12px;
-        font-weight: 750;
-        letter-spacing: .6px;
-        text-transform: uppercase;
-        box-shadow: 0 4px 15px rgba(15,23,42,.04);
-        margin-bottom: 28px;
-    }
-
-    h1 {
-        font-size: clamp(48px, 7vw, 82px);
-        line-height: 1.02;
-        letter-spacing: -4px;
-        font-weight: 800;
-        color: #0b1220;
-        margin-bottom: 27px;
-    }
-
-    .gradient-text {
-        background: linear-gradient(
-            90deg,
-            #2563eb,
-            #4f46e5,
-            #7c3aed
-        );
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-    }
-
-    .hero-description {
-        max-width: 680px;
-        margin: auto;
-        color: var(--muted);
-        font-size: 18px;
-        line-height: 1.75;
-    }
-
-    .hero-actions {
-        margin-top: 35px;
-        display: flex;
-        justify-content: center;
-        gap: 12px;
-        flex-wrap: wrap;
-    }
-
-    .button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 12px 20px;
-        border-radius: 10px;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 700;
-        transition: .2s ease;
-    }
-
-    .button-primary {
-        color: white;
-        background: var(--text);
-        box-shadow: 0 8px 20px rgba(15,23,42,.14);
-    }
-
-    .button-primary:hover {
-        transform: translateY(-2px);
-        background: #182235;
-    }
-
-    .button-secondary {
-        color: var(--text);
-        background: white;
-        border: 1px solid var(--border);
-    }
-
-    .button-secondary:hover {
-        border-color: #cbd5e1;
-        background: #f8fafc;
-    }
-
-    /* MAIN */
-
-    .main {
-        max-width: 1180px;
-        margin: auto;
-        padding: 20px 24px 100px;
-    }
-
-    .section-header {
-        text-align: center;
-        margin-bottom: 42px;
-    }
-
-    .section-header span {
-        color: var(--blue);
-        font-size: 12px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .section-header h2 {
-        margin-top: 8px;
-        font-size: 34px;
-        letter-spacing: -1.5px;
-    }
-
-    .section-header p {
-        color: var(--muted);
-        margin-top: 8px;
-        font-size: 15px;
-    }
-
-    /* CARDS */
-
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-    }
-
-    .card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 18px;
-        padding: 28px;
-        box-shadow: var(--shadow);
-        transition:
-            transform .25s ease,
-            box-shadow .25s ease,
-            border-color .25s ease;
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-        border-color: #d4def0;
-        box-shadow: 0 18px 50px rgba(15,23,42,.09);
-    }
-
-    .card-icon {
-        width: 48px;
-        height: 48px;
-        display: grid;
-        place-items: center;
-        border-radius: 13px;
-        background: var(--blue-soft);
-        font-size: 22px;
-        margin-bottom: 22px;
-    }
-
-    .card h3 {
-        font-size: 17px;
-        letter-spacing: -.3px;
-        margin-bottom: 8px;
-    }
-
-    .card p {
-        color: var(--muted);
-        font-size: 14px;
-        line-height: 1.7;
-    }
-
-    .card-status {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        margin-top: 20px;
-        color: var(--green);
-        font-size: 12px;
-        font-weight: 750;
-    }
-
-    .card-status i {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--green);
-    }
-
-    /* ARCHITECTURE */
-
-    .architecture {
-        margin-top: 70px;
-        padding: 42px;
-        border-radius: 22px;
-        border: 1px solid var(--border);
-        background:
-            linear-gradient(180deg, #ffffff, #fafbfe);
-        box-shadow: var(--shadow);
-    }
-
-    .architecture h2 {
-        text-align: center;
-        font-size: 27px;
-        letter-spacing: -1px;
-        margin-bottom: 10px;
-    }
-
-    .architecture-subtitle {
-        text-align: center;
-        color: var(--muted);
-        font-size: 14px;
-        margin-bottom: 35px;
-    }
-
-    .flow {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .node {
-        padding: 13px 17px;
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        background: white;
-        color: #344054;
-        font-size: 13px;
-        font-weight: 700;
-        box-shadow: 0 4px 12px rgba(15,23,42,.04);
-    }
-
-    .arrow {
-        color: #98a2b3;
-        font-size: 18px;
-    }
-
-    /* METRICS */
-
-    .metrics {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        margin-top: 18px;
-        border: 1px solid var(--border);
-        border-radius: 18px;
-        overflow: hidden;
-        background: white;
-        box-shadow: var(--shadow);
-    }
-
-    .metric {
-        text-align: center;
-        padding: 28px 15px;
-        border-right: 1px solid var(--border);
-    }
-
-    .metric:last-child {
-        border-right: none;
-    }
-
-    .metric strong {
-        display: block;
-        font-size: 25px;
-        letter-spacing: -.8px;
-    }
-
-    .metric span {
-        display: block;
-        margin-top: 3px;
-        color: var(--muted);
-        font-size: 12px;
-        font-weight: 600;
-    }
-
-    /* FOOTER */
-
-    footer {
-        border-top: 1px solid var(--border);
-        background: #fbfcfe;
-        padding: 35px 24px;
-        text-align: center;
-        color: var(--soft);
-        font-size: 12px;
-    }
-
-    footer strong {
-        color: #475467;
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 900px) {
-        .grid {
-            grid-template-columns: repeat(2, 1fr);
+            --shadow:
+                0 25px 80px rgba(0,0,0,.35);
         }
 
-        .metrics {
-            grid-template-columns: repeat(2, 1fr);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .metric:nth-child(2) {
-            border-right: none;
+        html {
+            scroll-behavior: smooth;
         }
 
-        .metric:nth-child(-n+2) {
-            border-bottom: 1px solid var(--border);
+        body {
+            min-height: 100vh;
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            color: var(--text);
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(59,130,246,.16),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 90% 20%,
+                    rgba(139,92,246,.09),
+                    transparent 28%
+                ),
+                var(--bg);
+
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .22;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.025) 1px,
+                    transparent 1px
+                );
+
+            background-size: 60px 60px;
+
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 75%
+                );
+        }
+
+        a {
+            color: inherit;
+        }
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            height: 78px;
+            padding: 0 6%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(5,7,13,.72);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            text-decoration: none;
+
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 19px;
+            font-weight: 700;
+            letter-spacing: -.5px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 0 30px rgba(59,130,246,.28);
+
+            font-size: 20px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #cbd5e1;
+            font-size: 12px;
+            font-weight: 600;
+
+            padding: 8px 13px;
+
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 999px;
+
+            background: rgba(255,255,255,.035);
+        }
+
+        .online-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+            background: var(--green);
+
+            box-shadow:
+                0 0 0 4px rgba(34,197,94,.10),
+                0 0 16px rgba(34,197,94,.65);
+
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%,100% {
+                box-shadow:
+                    0 0 0 4px rgba(34,197,94,.10),
+                    0 0 12px rgba(34,197,94,.45);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 0 7px rgba(34,197,94,.03),
+                    0 0 24px rgba(34,197,94,.8);
+            }
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+
+            text-align: center;
+
+            padding: 125px 24px 105px;
+        }
+
+        .orb {
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            left: 50%;
+            top: -300px;
+
+            transform: translateX(-50%);
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(59,130,246,.24),
+                    rgba(139,92,246,.10) 35%,
+                    transparent 70%
+                );
+
+            filter: blur(35px);
+
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 960px;
+            margin: auto;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 8px 14px;
+
+            border: 1px solid rgba(96,165,250,.22);
+            border-radius: 999px;
+
+            background:
+                rgba(59,130,246,.07);
+
+            color: #93c5fd;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+
+            box-shadow:
+                0 0 35px rgba(59,130,246,.08);
+        }
+
+        .eyebrow span {
+            color: #60a5fa;
         }
 
         h1 {
-            letter-spacing: -2.5px;
-        }
-    }
+            margin-top: 28px;
+            margin-bottom: 27px;
 
-    @media (max-width: 600px) {
-        .nav {
-            padding: 0 20px;
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: clamp(52px, 8vw, 92px);
+            line-height: .98;
+
+            letter-spacing: -5px;
+            font-weight: 700;
         }
 
-        .hero {
-            padding: 80px 20px 75px;
+        .gradient-text {
+            background:
+                linear-gradient(
+                    90deg,
+                    #60a5fa,
+                    #22d3ee,
+                    #8b5cf6
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+
+            background-size: 200% auto;
+
+            animation: gradientMove 5s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% center;
+            }
+
+            50% {
+                background-position: 100% center;
+            }
+
+            100% {
+                background-position: 0% center;
+            }
         }
 
         .hero-description {
-            font-size: 16px;
+            max-width: 700px;
+            margin: auto;
+
+            color: var(--muted);
+
+            font-size: 17px;
+            line-height: 1.8;
         }
 
-        h1 {
-            font-size: 48px;
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-top: 38px;
         }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 170px;
+
+            padding: 13px 20px;
+
+            border-radius: 11px;
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                border-color .25s ease;
+        }
+
+        .button-primary {
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            box-shadow:
+                0 12px 35px rgba(37,99,235,.25);
+        }
+
+        .button-primary:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 18px 45px rgba(37,99,235,.38);
+        }
+
+        .button-secondary {
+            border: 1px solid var(--border);
+
+            background: rgba(255,255,255,.04);
+
+            color: #e2e8f0;
+
+            backdrop-filter: blur(15px);
+        }
+
+        .button-secondary:hover {
+            transform: translateY(-3px);
+
+            border-color: rgba(96,165,250,.35);
+
+            background: rgba(255,255,255,.07);
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding:
+                10px 24px 100px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header span {
+            color: #60a5fa;
+
+            font-size: 11px;
+            font-weight: 800;
+
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+        }
+
+        .section-header h2 {
+            margin-top: 8px;
+
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: 34px;
+            letter-spacing: -1.5px;
+        }
+
+        .section-header p {
+            margin-top: 8px;
+
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* =========================
+           CARDS
+        ========================= */
 
         .grid {
-            grid-template-columns: 1fr;
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 17px;
         }
 
+        .card {
+            position: relative;
+            overflow: hidden;
+
+            padding: 28px;
+
+            border: 1px solid var(--border);
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.065),
+                    rgba(255,255,255,.025)
+                );
+
+            box-shadow: var(--shadow);
+
+            backdrop-filter: blur(20px);
+
+            transition:
+                transform .3s ease,
+                border-color .3s ease,
+                background .3s ease,
+                box-shadow .3s ease;
+        }
+
+        .card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            top: -100px;
+            right: -100px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(59,130,246,.13),
+                    transparent 70%
+                );
+
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+
+            border-color:
+                rgba(96,165,250,.24);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.085),
+                    rgba(255,255,255,.035)
+                );
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,.42),
+                0 0 35px rgba(59,130,246,.05);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+
+            display: grid;
+            place-items: center;
+
+            margin-bottom: 22px;
+
+            border: 1px solid rgba(96,165,250,.12);
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(59,130,246,.14),
+                    rgba(139,92,246,.10)
+                );
+
+            font-size: 22px;
+
+            box-shadow:
+                inset 0 1px rgba(255,255,255,.06);
+        }
+
+        .card h3 {
+            margin-bottom: 8px;
+
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: 17px;
+            letter-spacing: -.3px;
+        }
+
+        .card p {
+            color: var(--muted);
+
+            font-size: 13px;
+            line-height: 1.75;
+        }
+
+        .card-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            margin-top: 20px;
+
+            color: #4ade80;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .card-status i {
+            width: 6px;
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+
+            box-shadow:
+                0 0 10px rgba(34,197,94,.8);
+        }
+
+        /* =========================
+           METRICS
+        ========================= */
+
+        .metrics {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            margin-top: 18px;
+
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            box-shadow: var(--shadow);
+
+            backdrop-filter: blur(20px);
+        }
+
+        .metric {
+            position: relative;
+
+            text-align: center;
+
+            padding: 30px 15px;
+
+            border-right:
+                1px solid var(--border);
+        }
+
+        .metric:last-child {
+            border-right: none;
+        }
+
+        .metric strong {
+            display: block;
+
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: 27px;
+
+            letter-spacing: -.8px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #f8fafc,
+                    #93c5fd
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+        .metric span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: var(--muted);
+
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* =========================
+           ARCHITECTURE
+        ========================= */
+
         .architecture {
-            padding: 28px 18px;
+            position: relative;
+            overflow: hidden;
+
+            margin-top: 70px;
+
+            padding: 45px 35px;
+
+            border: 1px solid var(--border);
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(59,130,246,.065),
+                    rgba(139,92,246,.035)
+                );
+
+            box-shadow: var(--shadow);
+        }
+
+        .architecture::before {
+            content: "";
+
+            position: absolute;
+
+            width: 400px;
+            height: 400px;
+
+            left: 50%;
+            top: 30%;
+
+            transform: translate(-50%,-50%);
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(59,130,246,.09),
+                    transparent 70%
+                );
+
+            filter: blur(25px);
+
+            pointer-events: none;
+        }
+
+        .architecture h2 {
+            position: relative;
+
+            text-align: center;
+
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: 28px;
+            letter-spacing: -1px;
+        }
+
+        .architecture-subtitle {
+            position: relative;
+
+            text-align: center;
+
+            margin-top: 8px;
+            margin-bottom: 35px;
+
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        .flow {
+            position: relative;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+        }
+
+        .node {
+            padding: 14px 18px;
+
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 11px;
+
+            background:
+                rgba(255,255,255,.055);
+
+            color: #dbeafe;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            box-shadow:
+                inset 0 1px rgba(255,255,255,.04);
+
+            backdrop-filter: blur(15px);
+
+            transition:
+                transform .2s ease,
+                border-color .2s ease;
+        }
+
+        .node:hover {
+            transform: translateY(-3px);
+
+            border-color:
+                rgba(96,165,250,.35);
         }
 
         .arrow {
-            transform: rotate(90deg);
+            color: #475569;
+            font-size: 18px;
         }
 
-        .metrics {
-            grid-template-columns: 1fr 1fr;
-        }
-    }
-</style>
-```
+        /* =========================
+           FOOTER
+        ========================= */
 
+        footer {
+            padding: 45px 24px;
+
+            text-align: center;
+
+            border-top:
+                1px solid rgba(255,255,255,.07);
+
+            background:
+                rgba(0,0,0,.20);
+
+            color: #64748b;
+
+            font-size: 11px;
+        }
+
+        footer strong {
+            color: #cbd5e1;
+        }
+
+        .footer-brand {
+            display: inline-block;
+
+            margin-bottom: 5px;
+
+            color: white;
+
+            font-family: "Space Grotesk", sans-serif;
+
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .footer-name {
+            display: inline-block;
+
+            margin-top: 15px;
+
+            color: #94a3b8;
+
+            font-weight: 700;
+
+            letter-spacing: .4px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .metrics {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .metric:nth-child(2) {
+                border-right: none;
+            }
+
+            .metric:nth-child(-n+2) {
+                border-bottom:
+                    1px solid var(--border);
+            }
+
+            h1 {
+                letter-spacing: -3px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .nav {
+                padding: 0 20px;
+            }
+
+            .nav-right {
+                font-size: 10px;
+            }
+
+            .hero {
+                padding:
+                    90px 20px 80px;
+            }
+
+            h1 {
+                font-size: 50px;
+                letter-spacing: -2.5px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .architecture {
+                padding:
+                    32px 18px;
+            }
+
+            .arrow {
+                transform: rotate(90deg);
+            }
+
+            .flow {
+                flex-direction: column;
+            }
+
+            .node {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-```
-<!-- NAVIGATION -->
+<!-- =========================
+     NAVIGATION
+========================= -->
+
 <nav class="nav">
+
     <a href="#" class="brand">
         <div class="logo">☁</div>
         Cloud Lab
@@ -502,133 +940,239 @@
 
     <div class="nav-right">
         <span class="online-dot"></span>
-        All systems operational
+        All Systems Operational
     </div>
+
 </nav>
 
-<!-- HERO -->
+
+<!-- =========================
+     HERO
+========================= -->
+
 <header class="hero">
+
+    <div class="orb"></div>
+
     <div class="hero-content">
 
         <div class="eyebrow">
             <span>✦</span>
-            Cloud Infrastructure Platform
+            Premium Cloud Infrastructure
         </div>
 
         <h1>
-            Modern infrastructure.<br>
-            <span class="gradient-text">Built to scale.</span>
+            Infrastructure<br>
+            <span class="gradient-text">
+                engineered to scale.
+            </span>
         </h1>
 
         <p class="hero-description">
-            A professional cloud engineering environment demonstrating
-            containerized workloads, automated CI/CD, secure networking,
-            and reliable infrastructure operations.
+            A production-inspired cloud engineering environment
+            built around containers, automated CI/CD,
+            private networking, and reliable infrastructure.
         </p>
 
         <div class="hero-actions">
-            <a href="#architecture" class="button button-primary">
-                Explore Architecture
+
+            <a
+                href="#architecture"
+                class="button button-primary"
+            >
+                Explore Architecture →
             </a>
 
-            <a href="#services" class="button button-secondary">
-                View Services
+            <a
+                href="#services"
+                class="button button-secondary"
+            >
+                View Infrastructure
             </a>
+
         </div>
 
     </div>
+
 </header>
+
 
 <main class="main">
 
-    <!-- SERVICES -->
+
+    <!-- =========================
+         SERVICES
+    ========================= -->
+
     <section id="services">
 
         <div class="section-header">
-            <span>Infrastructure</span>
-            <h2>Everything connected.</h2>
-            <p>A clean, reliable foundation for modern cloud workloads.</p>
+
+            <span>Infrastructure Stack</span>
+
+            <h2>
+                Built for modern operations.
+            </h2>
+
+            <p>
+                Secure, automated, containerized infrastructure.
+            </p>
+
         </div>
+
 
         <div class="grid">
 
-            <article class="card">
-                <div class="card-icon">🐳</div>
-                <h3>Container Platform</h3>
-                <p>
-                    Application workloads run inside reproducible,
-                    isolated Docker containers.
-                </p>
-                <div class="card-status">
-                    <i></i> Operational
-                </div>
-            </article>
 
             <article class="card">
-                <div class="card-icon">⚡</div>
-                <h3>Continuous Delivery</h3>
-                <p>
-                    GitHub Actions automatically builds, publishes,
-                    and deploys application releases.
-                </p>
-                <div class="card-status">
-                    <i></i> Automated
+
+                <div class="card-icon">
+                    🐳
                 </div>
+
+                <h3>
+                    Container Platform
+                </h3>
+
+                <p>
+                    Reproducible application workloads
+                    running inside isolated Docker containers.
+                </p>
+
+                <div class="card-status">
+                    <i></i>
+                    Operational
+                </div>
+
             </article>
 
-            <article class="card">
-                <div class="card-icon">🔐</div>
-                <h3>Private Networking</h3>
-                <p>
-                    Secure machine-to-machine connectivity powered
-                    by encrypted Tailscale networking.
-                </p>
-                <div class="card-status">
-                    <i></i> Protected
-                </div>
-            </article>
 
             <article class="card">
-                <div class="card-icon">◉</div>
-                <h3>MySQL Database</h3>
-                <p>
-                    Persistent MySQL infrastructure deployed as an
-                    independent Docker service.
-                </p>
-                <div class="card-status">
-                    <i></i> Healthy
+
+                <div class="card-icon">
+                    ⚡
                 </div>
+
+                <h3>
+                    Continuous Delivery
+                </h3>
+
+                <p>
+                    Automated CI/CD pipelines build,
+                    publish, and deploy every release.
+                </p>
+
+                <div class="card-status">
+                    <i></i>
+                    Automated
+                </div>
+
             </article>
 
-            <article class="card">
-                <div class="card-icon">◎</div>
-                <h3>Web Application</h3>
-                <p>
-                    Lightweight NGINX-based application serving the
-                    Cloud Lab experience.
-                </p>
-                <div class="card-status">
-                    <i></i> Online · 8090
-                </div>
-            </article>
 
             <article class="card">
-                <div class="card-icon">↗</div>
-                <h3>Automated Deployment</h3>
-                <p>
-                    Production-style deployment from source control
-                    to Docker Hub and the cloud server.
-                </p>
-                <div class="card-status">
-                    <i></i> Ready
+
+                <div class="card-icon">
+                    🔐
                 </div>
+
+                <h3>
+                    Private Networking
+                </h3>
+
+                <p>
+                    Encrypted machine-to-machine connectivity
+                    powered by Tailscale.
+                </p>
+
+                <div class="card-status">
+                    <i></i>
+                    Protected
+                </div>
+
             </article>
+
+
+            <article class="card">
+
+                <div class="card-icon">
+                    ◉
+                </div>
+
+                <h3>
+                    MySQL Database
+                </h3>
+
+                <p>
+                    Persistent MySQL infrastructure running
+                    as an independent container service.
+                </p>
+
+                <div class="card-status">
+                    <i></i>
+                    Healthy
+                </div>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="card-icon">
+                    ◎
+                </div>
+
+                <h3>
+                    Web Application
+                </h3>
+
+                <p>
+                    Lightweight NGINX application serving
+                    the Cloud Lab experience.
+                </p>
+
+                <div class="card-status">
+                    <i></i>
+                    Online · 8090
+                </div>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="card-icon">
+                    ↗
+                </div>
+
+                <h3>
+                    Automated Deployment
+                </h3>
+
+                <p>
+                    Source control → Docker Hub →
+                    Tailscale → Cloud Server.
+                </p>
+
+                <div class="card-status">
+                    <i></i>
+                    Ready
+                </div>
+
+            </article>
+
 
         </div>
+
     </section>
 
-    <!-- METRICS -->
+
+    <!-- =========================
+         METRICS
+    ========================= -->
+
     <section class="metrics">
+
         <div class="metric">
             <strong>99.9%</strong>
             <span>Target Availability</span>
@@ -645,59 +1189,103 @@
         </div>
 
         <div class="metric">
-            <strong>Secure</strong>
-            <span>Private Network</span>
+            <strong>Private</strong>
+            <span>Encrypted Network</span>
         </div>
+
     </section>
 
-    <!-- ARCHITECTURE -->
-    <section class="architecture" id="architecture">
 
-        <h2>Deployment Architecture</h2>
+    <!-- =========================
+         ARCHITECTURE
+    ========================= -->
+
+    <section
+        class="architecture"
+        id="architecture"
+    >
+
+        <h2>
+            Deployment Architecture
+        </h2>
 
         <p class="architecture-subtitle">
-            From source code to running production-style infrastructure.
+            A secure path from source code to production-style infrastructure.
         </p>
 
+
         <div class="flow">
-            <div class="node">GitHub</div>
+
+            <div class="node">
+                GitHub
+            </div>
+
             <span class="arrow">→</span>
 
-            <div class="node">GitHub Actions</div>
+            <div class="node">
+                GitHub Actions
+            </div>
+
             <span class="arrow">→</span>
 
-            <div class="node">Docker Hub</div>
+            <div class="node">
+                Docker Hub
+            </div>
+
             <span class="arrow">→</span>
 
-            <div class="node">Tailscale</div>
+            <div class="node">
+                Tailscale
+            </div>
+
             <span class="arrow">→</span>
 
-            <div class="node">Bank Server</div>
+            <div class="node">
+                Bank Server
+            </div>
+
             <span class="arrow">→</span>
 
-            <div class="node">Docker Compose</div>
+            <div class="node">
+                Docker Compose
+            </div>
+
         </div>
 
     </section>
+
 
 </main>
 
-<!-- FOOTER -->
-<!-- FOOTER -->
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
-    <strong>Cloud Lab</strong> · Cloud Engineering Infrastructure
+
+    <div class="footer-brand">
+        CLOUD LAB
+    </div>
+
     <br>
+
+    <strong>
+        Cloud Engineering · DevOps · Infrastructure
+    </strong>
+
+    <br>
+
     Docker · GitHub Actions · MySQL · Tailscale
-    <br><br>
-    <span style="color:#344054; font-weight:700;">
+
+    <br>
+
+    <span class="footer-name">
         Built &amp; Engineered by DARO-HUY
     </span>
-    <br>
-    <span style="color:#98A2B3;">
-        Cloud Engineering · DevOps · Infrastructure
-    </span>
+
 </footer>
+
 
 </body>
 </html>
